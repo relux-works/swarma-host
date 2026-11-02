@@ -1,0 +1,350 @@
+# PRODUCT CARD: swarm. Format: product-card/v3 (see ../README.md). Canonical desired team description.
+# No live state, credentials, authority or launch permission. Relative locators use this card directory.
+schema: product-card/v3
+product:
+  id: swarm
+  description: >-
+    Alexis-side product for agent-swarm infrastructure: the a2a coordination service, our contribution lane to Curator,
+    the m1max self-hosted CI runners, the remote-worker security protocol and harness, and the model-traffic network proxy.
+  privacy: public
+  keeper: keeper-vega
+  default_binding: alexis-m1max
+  topology:         # owner decision 2026-10-29 ~09:15Z via Meta ($NM-B3o98RMtYwUC87RGgUU7RTyOLHdcqGVDCYZpmQec): everything in the relux #swarm product space; the gr Swarm space was emptied
+    connection: relux
+    space: "!WnPQa7t_0SP0JxW_o8o1xuQRHQHdO1TMXrqExjGb8s8"   # #swarm
+    lobby: "#swarm-lobby:relux.works"
+    escalations: "#swarm-escalations:gr.relux.works"   # named «swarma-escalations»; a gr room, child of #swarm
+    grouped_rooms: ["#swarm-escalations:gr.relux.works"]
+external_members:   # members owned by other cards; referenced as parents only
+  - meta-keeper_keeper
+connections:        # named Matrix connections: endpoint only, never a credential
+  relux: { homeserver: "https://matrix.relux.works", server_name: relux.works }
+  gr:    { homeserver: "https://gr.relux.works", server_name: gr.relux.works }
+bindings:           # operator/host bindings; full identity = identity_prefix + member id (resolved, never stored)
+  alexis-m1max: { operator: alexis, host: m1max, identity_prefix: m1max_, connection: relux }
+  services-gr: { operator: alexis, host: m1max, identity_prefix: "services.", connection: gr }
+  swarma-gr: { operator: alexis, host: m1max, identity_prefix: "swarma.", connection: gr }
+profiles_root: ../../../../agents-curator-profiles/profiles   # relative to this card's directory
+profiles:           # requirement: a compatible range; selected: the immutable lock an authorized update chose (not install evidence)
+  swarm-keeper:
+    path: swarm-keeper
+    requirement: { context: m1max-swarm-keeper-context, compatible: ">=0.1.1 <0.2.0" }
+    selected: { version: 0.1.6, source_rev: 0f58d1e6c5c07455061b162fa0c6033811d3e4e0, lock_sha256: 8526b5afbfd6233586253705b519803cea0f32a78dbfb124665e6dca576799fd }
+  swarm-orch:
+    path: swarm-orch
+    requirement: { context: m1max-swarm-orch-context, compatible: ">=0.1.0 <0.2.0" }
+    selected: { version: 0.1.11, source_rev: f0f90611291ebb16e86c4abdcd2c58352ec01490, lock_sha256: 52bfdd5e3e1e5cd476f41424cabcfb8907715ebb9af5b377b1925fb53960990d }
+  swarm-child:
+    path: swarm-child
+    requirement: { context: m1max-swarm-child-context, compatible: ">=0.1.0 <0.2.0" }
+    selected: { version: 0.1.0, source_rev: 862babc, lock_sha256: 855c0d128fa113d9f0b5f471fbd20712c80f83525c1f920131580907729f8a90 }
+  development-member:
+    registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development-member }
+    requirement: { context: alexis-development-member-context, compatible: ">=0.1.0 <0.2.0" }
+    selected: { version: 0.1.0, source_rev: 1e45625449c3816da2095690a76e2c772986cb9a, lock_sha256: 355670628666c213e8514fa1894cf184d693e53ad629e793ccca72244aac0336 }
+  development_product_solution-architect:
+    registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development_product_solution-architect }
+    requirement: { context: alexis-development-product-solution-architect-context, compatible: ">=0.1.1 <0.2.0" }
+    selected: { version: 0.1.1, source_rev: cfb133c8ff07aa6e11e68c8ef29c7b6a28c59863, lock_sha256: 0afeb17aac77bbfded1d7acda6fa1b9ad8bd87b55d918e83f61a6cd785b46674 }
+  development_go_developer:
+    registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development_go_developer }
+    requirement: { context: alexis-development-go-developer-context, compatible: ">=0.1.2 <0.2.0" }
+    selected: { version: 0.1.2, source_rev: d2561e1c14b0ca994b613ce62bf4fdb7ae878494, lock_sha256: 903aa6c67ab554638c6a4b2aaeffa9d081b39f754f906bafc193dd1d92541471 }
+  development_product_tester-automator:
+    registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development_product_tester-automator }
+    requirement: { context: alexis-development-product-tester-automator-context, compatible: ">=0.1.0 <0.2.0" }
+    selected: { version: 0.1.0, source_rev: cfb133c8ff07aa6e11e68c8ef29c7b6a28c59863, lock_sha256: 444baed2db8badee149e0977ca6a3ee2acb98f60976c2e4bc796f0df6ec8e561 }
+projects:
+  - id: a2a-swarm
+    description: Agent-to-agent coordination over Matrix (the a2a CLI, bindings, mailbox, liveness).
+    path: ../../a2a-swarm
+    repo: github.com/relux-works/a2a-swarm
+    desired_state: active
+    orchestrator: keeper-vega
+    orchestrator_mode: keeper
+    orchestrator_ref: "Meta route 2026-10-29, keeper as keeper-orch while no unattended orch route exists ($RYYaidOJGwt0WbMkS8oaBYBxPxjipRr0k3W76Au5EI0)"
+    task_system: { kind: task-board, path: ../../a2a-swarm }
+    channels: { mode: shared, team_room: "#swarm-a2a-swarm" }
+  - id: curator
+    description: Contribution lane to Ivan's Curator (agent environment manager); PRs only, Ivan's lane lands.
+    path: ../../curator
+    repo: github.com/relux-works/curator
+    desired_state: parked
+    desired_state_ref: "Meta relay $9gkbnZsQjd8zurO2oobWkWpBIF2Jhp18HfVn2f1hLfQ of the owner's verbatim words in Meta's session, 2026-10-28: «ок пусть Ванины чувачки подхватят и овнершипят своего куратора»; Ivan's lane owns Curator continuation"
+    orchestrator: curator_orch
+    task_system: { kind: task-board, path: ../../curator }
+    channels: { mode: shared, team_room: "#swarm-curator" }
+  - id: gha-runner-m1max
+    description: Operations for the self-hosted GitHub Actions runners on m1max (SPM runners and the a2a-swarm runner).
+    path: ../../gha-runner-m1max
+    repo: local
+    desired_state: parked
+    desired_state_ref: "Owner park relayed by Meta, 2026-10-27 ($7ZKERa7hDHTFTWWMz_uF0Ujv82FhCElGWQ2QPlX1Tjg); not in the 10-29 lane"
+    orchestrator: gha-runner_orch
+    task_system: { kind: tasks-md, path: ../../gha-runner-m1max/.temp/tasks.md }
+    channels: { mode: shared, team_room: "#swarm-gha-runner" }
+  - id: remote-workplace
+    description: Security protocol and reference workplace for remote workers (model remote, tool calls local).
+    path: ../../remote-workplace
+    repo: github.com/relux-works/remote-workplace
+    desired_state: parked
+    desired_state_ref: "Owner park relayed by Meta, 2026-10-27 ($7ZKERa7hDHTFTWWMz_uF0Ujv82FhCElGWQ2QPlX1Tjg); not in the 10-29 lane"
+    orchestrator: remote-workplace_orch
+    task_system: { kind: task-board, path: ../../remote-workplace }
+    channels: { mode: shared, team_room: "#swarm-remote-workplace" }
+  - id: network-proxy   # owner direct order 2026-10-29 ~08:30Z, relayed by Meta ($0g7iIKPfqhNWQAcrmUdoEPLjggqhRutAIn2wNADwfac)
+    description: Data-filtering network proxy that the launcher starts every model runtime behind; overview and feasibility first.
+    path: ../../network-proxy
+    repo: github.com/relux-works/swarm-network-proxy   # private; created on the owner's direct word 2026-10-29 (Meta $TiuZcYPXZzM2_wOzaXh0R3de4H18A0Z4VcUiHk2TRj0)
+    desired_state: active
+    orchestrator: network-proxy_orch
+    task_system: { kind: task-board, path: ../../network-proxy }
+    channels: { mode: shared, team_room: "#swarm-network-proxy" }   # !xZLSJLrP8L9AmusVsTDcvxOMbhSL_1Bo0oXcpLttkXo on relux.works, child of the swarm product space (Meta $fYLkcfnRVQIJrmidLbq6OP88MWOTbEfdNSnQ4G66C-I)
+  - id: swarma-pulse   # owner decision 86, 2026-10-29, set up by Meta ($_Mdmtmg5bJdi_L0ViyQ2icR5ixvDhGW9ys0m7eZtN9g)
+    description: Owns the product card format, the member identity scheme and the pulse projection query.
+    path: ../../swarma-pulse
+    repo: github.com/relux-works/swarma-pulse   # private; creation waits on one owner command (Meta, 2026-10-29)
+    desired_state: active
+    orchestrator: swarma-pulse_orch
+    task_system: { kind: task-board, path: ../../swarma-pulse }
+    channels: { mode: shared, team_room: "#swarma-pulse" }   # !0RO1Fx358akBIYnyIwQ48Rt6mOM43IoyEDu5XTV5BtE on relux.works, in the #swarm space; no product-prefixed alias (Meta $RCOFz0QfWhhYN-irhlarhsusSgtqUjq3P1R5DbIabOg)
+  - id: swarma-session-host
+    description: Host for agent sessions.
+    path: ../../swarma-session-host
+    repo: github.com/relux-works/swarma-session-host   # public
+    desired_state: active
+    orchestrator: swarma-session-host_orch
+    task_system: { kind: task-board, path: ../../swarma-session-host }
+    channels: { mode: shared, team_room: "#swarma-session-host" }   # !SFMpMVGEKJRZKQ78Va932EauBkG-g-zpPxDb7d5vVEE on relux.works, in #swarm
+  - id: remote-worker-harness
+    description: Harness to run coding agents on a remote machine's subscription with tool calls executed locally.
+    path: ../../remote-worker-harness
+    repo: github.com/relux-works/remote-worker-harness
+    desired_state: parked
+    orchestrator: remote-worker-harness_orch
+    task_system: { kind: task-board, path: ../../remote-worker-harness }
+    channels: { mode: shared, team_room: "#swarm-remote-worker-harness" }
+  - id: swarma-services
+    description: Independent Go services, beginning with the macOS artifact signer and its keyless build boundary.
+    path: ../../swarma-services
+    repo: github.com/relux-works/swarma-services
+    desired_state: active
+    orchestrator: orch-procyon
+    task_system: { kind: task-board, path: ../../swarma-services }
+    channels: { mode: shared, team_room: "#swarma-services:gr.relux.works" }
+members:
+  - id: keeper-vega
+    role: keeper
+    binding: swarma-gr
+    parent: meta-keeper_keeper
+    profile: swarm-keeper
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
+    pulse:
+      schema: pulse-member-environment/v1
+      a2a_config_profile: swarma-gr
+      working_root: ../..
+      network: { mode: direct }
+    lifecycle: persistent
+    desired_state: active
+    context_mode: continue
+    capabilities: [keeper, orchestrator]
+    a2a:
+      connection: gr
+      parent_route: "#swarm-lobby:relux.works"
+      spaces: ["#swarm:relux.works", "#swarm-platform:relux.works"]   # joined Spaces: membership only, never subscribed
+      rooms: ["#swarm-lobby:relux.works", "#swarm:relux.works", "#swarm-system:relux.works", "#swarm-broadcast:relux.works", "#swarm-platform:relux.works", "#swarm-mandates:relux.works",
+              "#swarm-a2a-swarm:relux.works", "#swarm-curator:relux.works", "#swarm-gha-runner:relux.works", "#swarm-remote-workplace:relux.works",
+              "#swarm-remote-worker-harness:relux.works", "#swarm-network-proxy:relux.works", "#swarma-pulse:relux.works", "#swarma-session-host:relux.works", "#lobby:relux.works", "#curator-migration:relux.works",
+              "#swarm-escalations:gr.relux.works",
+              "#swarm-a2a-voice-scratch:relux.works"]   # temporary: voice (A5) test room, still has the owner, Meta and the parked a2a orch; retire once empty
+      subscriptions:
+        required:   # manager-defined (Meta and the owner); the member applies them and cannot remove them
+          - rooms: ["#swarm-lobby:relux.works", "#swarm-system:relux.works", "#swarm-broadcast:relux.works", "#swarm-mandates:relux.works",
+                    "#swarm-a2a-swarm:relux.works", "#swarm-curator:relux.works", "#swarm-gha-runner:relux.works", "#swarm-remote-workplace:relux.works",
+                    "#swarm-remote-worker-harness:relux.works", "#swarm-network-proxy:relux.works", "#swarma-pulse:relux.works", "#swarma-session-host:relux.works", "#lobby:relux.works", "#curator-migration:relux.works",
+                    "#swarm-escalations:gr.relux.works"]
+            kinds: [system, owner-needed, decision]
+          - rooms: ["#swarm-system:relux.works"]
+            kinds: [system]
+            subtypes: [incident, blocker, budget, window, queue, impact-start, impact-end]
+          - from_mxid: "@alexis:relux.works"
+          - from_mxid: "@alexis:gr.relux.works"
+          - { from_mxid: "@alexis:gr.relux.works", rooms: ["#swarm-escalations:gr.relux.works"], all_events: true }
+        self: []
+    staffing:
+      - { role: orchestrator, profile: swarm-orch, count: 4, lifecycle: persistent, context_mode: continue }
+      - { role: reviewer, profile: development-member, count: 2, lifecycle: persistent, context_mode: fresh, independent_of_producer: true }   # covers reviews until both cross-review seats run
+      # Stable product development staff (owner, 2026-10-30): two architects and two developers who cross-review each
+      # other at readiness, the architects giving the final review of integrated solutions, plus tester-automators.
+      # Models (owner decisions 102 and 104): architects gpt-6.1-sol max and claude-opus-5-5 xhigh; developers and
+      # testers gpt-6.1-sol high. One staff set for the whole product until the queue proves a split.
+      - { role: architect, profile: development_product_solution-architect, count: 2, lifecycle: persistent, context_mode: continue }
+      - { role: developer, profile: development_go_developer, count: 2, lifecycle: persistent, context_mode: continue }
+      - { role: tester, profile: development_product_tester-automator, count: 1, lifecycle: persistent, context_mode: continue }
+  - &orch
+    id: a2a-swarm_orch
+    role: orchestrator
+    project: a2a-swarm
+    parent: keeper-vega
+    profile: swarm-orch
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
+    lifecycle: persistent
+    desired_state: parked
+    desired_state_ref: "Orch resume withdrawn 2026-10-29: no admitted unattended Codex permission route on codex 0.164 ($RYYaidOJGwt0WbMkS8oaBYBxPxjipRr0k3W76Au5EI0)"
+    context_mode: continue
+    clone: ../../a2a-swarm
+    capabilities: [orchestrator]
+    a2a:
+      connection: relux
+      parent_route: "#swarm-a2a-swarm"
+      rooms: ["#swarm-a2a-swarm", "#swarm-lobby", "#lobby"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-a2a-swarm", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing:
+      - { role: developer, profile: swarm-child, count: 1, lifecycle: on-demand, context_mode: continue }
+      - { role: reviewer,  profile: swarm-child, count: 1, lifecycle: on-demand, context_mode: fresh, independent_of_producer: true }
+  - <<: *orch
+    id: curator_orch
+    project: curator
+    desired_state: parked
+    desired_state_ref: "Meta relay $9gkbnZsQjd8zurO2oobWkWpBIF2Jhp18HfVn2f1hLfQ of the owner's verbatim words in Meta's session, 2026-10-28: «ок пусть Ванины чувачки подхватят и овнершипят своего куратора»; Ivan's lane owns Curator continuation"
+    clone: ../../curator
+    a2a:
+      connection: relux
+      parent_route: "#swarm-curator"
+      rooms: ["#swarm-curator", "#curator", "#swarm-lobby", "#lobby", "#curator-migration"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-curator", "#curator", "#swarm-lobby", "#lobby", "#curator-migration"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+        self: []
+  - <<: *orch
+    id: gha-runner_orch
+    project: gha-runner-m1max
+    desired_state_ref: "Owner park relayed by Meta, 2026-10-27 ($7ZKERa7hDHTFTWWMz_uF0Ujv82FhCElGWQ2QPlX1Tjg)"
+    clone: ../../gha-runner-m1max
+    a2a:
+      connection: relux
+      parent_route: "#swarm-gha-runner"
+      rooms: ["#swarm-gha-runner", "#swarm-lobby", "#lobby"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-gha-runner", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+        self: []
+    staffing: []
+  - <<: *orch
+    id: remote-workplace_orch
+    project: remote-workplace
+    desired_state_ref: "Owner park relayed by Meta, 2026-10-27 ($7ZKERa7hDHTFTWWMz_uF0Ujv82FhCElGWQ2QPlX1Tjg)"
+    clone: ../../remote-workplace
+    a2a:
+      connection: relux
+      parent_route: "#swarm-remote-workplace"
+      rooms: ["#swarm-remote-workplace", "#swarm-lobby", "#lobby"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-remote-workplace", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+        self: []
+    staffing: []
+  - <<: *orch
+    id: remote-worker-harness_orch
+    project: remote-worker-harness
+    desired_state_ref: "Parked since 2026-10-26 (project parked)"
+    clone: ../../remote-worker-harness
+    a2a:
+      connection: relux
+      parent_route: "#swarm-remote-worker-harness"
+      rooms: ["#swarm-remote-worker-harness", "#swarm-lobby", "#lobby"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-remote-worker-harness", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+        self: []
+    staffing: []
+  - <<: *orch
+    id: network-proxy_orch
+    project: network-proxy
+    runtime: { kind: claude_code, model: claude-opus-5-5 }
+    desired_state: active
+    desired_state_ref: "Owner direct order 2026-10-29 ~08:30Z via Meta ($0g7iIKPfqhNWQAcrmUdoEPLjggqhRutAIn2wNADwfac); Meta raises it through the Claude member launcher after the room-placement answer; first task: overview"
+    clone: ../../network-proxy
+    a2a:
+      connection: relux
+      parent_route: "#swarm-network-proxy"
+      rooms: ["#swarm-network-proxy", "#swarm-lobby", "#lobby"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-network-proxy", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing:
+      - { role: researcher, profile: swarm-child, count: 1, lifecycle: on-demand, context_mode: continue }
+      - { role: reviewer,   profile: swarm-child, count: 1, lifecycle: on-demand, context_mode: fresh, independent_of_producer: true }
+  - <<: *orch
+    id: swarma-pulse_orch
+    project: swarma-pulse
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
+    desired_state: active
+    desired_state_ref: "Owner decision 86, 2026-10-29: Meta set up the project and registered the account ($RCOFz0QfWhhYN-irhlarhsusSgtqUjq3P1R5DbIabOg); the swarm keeper launches it through curator run; first unit: specification only"
+    clone: ../../swarma-pulse
+    a2a:
+      connection: relux
+      parent_route: "#swarma-pulse"
+      rooms: ["#swarma-pulse", "#swarm-lobby", "#swarm-broadcast", "#lobby", "#broadcast"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarma-pulse", "#swarm-lobby", "#swarm-broadcast", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing:
+      - { role: reviewer, profile: swarm-child, count: 1, lifecycle: on-demand, context_mode: fresh, independent_of_producer: true }
+  - <<: *orch
+    id: swarma-session-host_orch
+    project: swarma-session-host
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
+    desired_state: active
+    desired_state_ref: "Owner direction, 2026-10-29: host for agent sessions."
+    clone: ../../swarma-session-host
+    a2a:
+      connection: relux
+      parent_route: "#swarma-session-host"
+      rooms: ["#swarma-session-host", "#swarm", "#swarm-lobby", "#swarm-broadcast"]
+      spaces: ["#swarm"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarma-session-host", "#swarm-lobby", "#swarm-broadcast"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing: []
+  - id: orch-procyon
+    role: orchestrator
+    project: swarma-services
+    parent: keeper-vega
+    binding: services-gr
+    profile: swarm-orch
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
+    lifecycle: persistent
+    desired_state: active
+    context_mode: continue
+    clone: ../../swarma-services
+    capabilities: [orchestrator]
+    a2a:
+      connection: gr
+      parent_route: "#swarma-services:gr.relux.works"
+      rooms: ["#swarma-services:gr.relux.works"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarma-services:gr.relux.works"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing: []
