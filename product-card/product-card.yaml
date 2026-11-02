@@ -75,8 +75,8 @@ projects:
     description: Contribution lane to Ivan's Curator (agent environment manager); PRs only, Ivan's lane lands.
     path: ../../curator
     repo: github.com/relux-works/curator
-    desired_state: parked
-    desired_state_ref: "Meta relay $9gkbnZsQjd8zurO2oobWkWpBIF2Jhp18HfVn2f1hLfQ of the owner's verbatim words in Meta's session, 2026-10-28: «ок пусть Ванины чувачки подхватят и овнершипят своего куратора»; Ivan's lane owns Curator continuation"
+    desired_state: active
+    desired_state_ref: "Active contribution lane under owner decisions 79, 89, 90, 91 and 93 (2026-10-29), 95 and 108 (2026-10-30), and 126 (2026-11-01). Ivan's lane retains upstream review and landing custody; local reviewed builds follow decision 95. No new launch or publication authority."
     orchestrator: orch-arcturus
     task_system: { kind: task-board, path: ../../curator }
     channels: { mode: shared, team_room: "#swarm-curator" }
@@ -233,8 +233,8 @@ members:
     id: orch-arcturus
     binding: curator-gr
     project: curator
-    desired_state: parked
-    desired_state_ref: "Meta relay $9gkbnZsQjd8zurO2oobWkWpBIF2Jhp18HfVn2f1hLfQ of the owner's verbatim words in Meta's session, 2026-10-28: «ок пусть Ванины чувачки подхватят и овнершипят своего куратора»; Ivan's lane owns Curator continuation"
+    desired_state: active
+    desired_state_ref: "Active contribution lane under owner decisions 79, 89, 90, 91 and 93 (2026-10-29), 95 and 108 (2026-10-30), and 126 (2026-11-01). Ivan's lane retains upstream review and landing custody; local reviewed builds follow decision 95. No new launch or publication authority."
     clone: ../../curator
     a2a:
       connection: gr
