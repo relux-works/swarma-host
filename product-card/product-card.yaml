@@ -35,7 +35,7 @@ profiles:           # requirement: a compatible range; selected: the immutable l
   swarm-keeper:
     path: swarm-keeper
     requirement: { context: m1max-swarm-keeper-context, compatible: ">=0.1.1 <0.2.0" }
-    selected: { version: 0.1.6, source_rev: 0f58d1e6c5c07455061b162fa0c6033811d3e4e0, lock_sha256: 8526b5afbfd6233586253705b519803cea0f32a78dbfb124665e6dca576799fd }
+    selected: { version: 0.1.7, source_rev: f263014590e60492cb794ac4d922c2c6e3a4efd2, lock_sha256: a44e140dcf5dba32c9c68319bd66b46d4756b9d45fe827e5561c91c24b882d17 }
   swarm-orch:
     path: swarm-orch
     requirement: { context: m1max-swarm-orch-context, compatible: ">=0.1.0 <0.2.0" }
