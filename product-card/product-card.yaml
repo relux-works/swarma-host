@@ -39,7 +39,7 @@ profiles:           # requirement: a compatible range; selected: the immutable l
   swarm-orch:
     path: swarm-orch
     requirement: { context: m1max-swarm-orch-context, compatible: ">=0.1.0 <0.2.0" }
-    selected: { version: 0.1.11, source_rev: f0f90611291ebb16e86c4abdcd2c58352ec01490, lock_sha256: 52bfdd5e3e1e5cd476f41424cabcfb8907715ebb9af5b377b1925fb53960990d }
+    selected: { version: 0.1.17, source_rev: f263014590e60492cb794ac4d922c2c6e3a4efd2, lock_sha256: 18270c3f137943e24969bac5e06cf62514495d53477fb2d412dc2814c175bc8a }
   swarm-child:
     path: swarm-child
     requirement: { context: m1max-swarm-child-context, compatible: ">=0.1.0 <0.2.0" }
