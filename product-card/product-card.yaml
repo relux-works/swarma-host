@@ -238,11 +238,11 @@ members:
     clone: ../../curator
     a2a:
       connection: gr
-      parent_route: "#swarm-curator"
-      rooms: ["#swarm-curator", "#curator", "#swarm-lobby", "#lobby", "#curator-migration"]
+      parent_route: "#swarm-curator:relux.works"
+      rooms: ["#swarm-curator:relux.works", "#curator:relux.works", "#swarm-lobby:relux.works", "#lobby:relux.works", "#curator-migration:relux.works"]
       subscriptions:
         required:
-          - { rooms: ["#swarm-curator", "#curator", "#swarm-lobby", "#lobby", "#curator-migration"], kinds: [system, owner-needed, decision] }
+          - { rooms: ["#swarm-curator:relux.works", "#curator:relux.works", "#swarm-lobby:relux.works", "#lobby:relux.works", "#curator-migration:relux.works"], kinds: [system, owner-needed, decision] }
           - { from_mxid: "@alexis:relux.works" }
         self: []
   - <<: *orch
@@ -294,17 +294,17 @@ members:
     id: orch-polaris
     binding: network-proxy-gr
     project: network-proxy
-    runtime: { kind: claude_code, model: claude-opus-5-5 }
+    runtime: { kind: codex_cli, model: gpt-6.1-sol, effort: high }
     desired_state: active
-    desired_state_ref: "Owner direct order 2026-10-29 ~08:30Z via Meta ($0g7iIKPfqhNWQAcrmUdoEPLjggqhRutAIn2wNADwfac); Meta raises it through the Claude member launcher after the room-placement answer; first task: overview"
+    desired_state_ref: "Owner direct order 2026-10-29 ~08:30Z via Meta ($0g7iIKPfqhNWQAcrmUdoEPLjggqhRutAIn2wNADwfac); runtime updated by the owner move to Codex through Curator, 2026-10-30"
     clone: ../../network-proxy
     a2a:
       connection: gr
-      parent_route: "#swarm-network-proxy"
-      rooms: ["#swarm-network-proxy", "#swarm-lobby", "#lobby"]
+      parent_route: "#swarm-network-proxy:relux.works"
+      rooms: ["#swarm-network-proxy:relux.works", "#swarm-lobby:relux.works", "#lobby:relux.works"]
       subscriptions:
         required:
-          - { rooms: ["#swarm-network-proxy", "#swarm-lobby", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { rooms: ["#swarm-network-proxy:relux.works", "#swarm-lobby:relux.works", "#lobby:relux.works"], kinds: [system, owner-needed, decision] }
           - { from_mxid: "@alexis:relux.works" }
           - { from_mxid: "@alexis:gr.relux.works" }
         self: []
@@ -321,11 +321,11 @@ members:
     clone: ../../swarma-pulse
     a2a:
       connection: gr
-      parent_route: "#swarma-pulse"
-      rooms: ["#swarma-pulse", "#swarm-lobby", "#swarm-broadcast", "#lobby", "#broadcast"]
+      parent_route: "#swarma-pulse:relux.works"
+      rooms: ["#swarma-pulse:relux.works", "#swarm-lobby:relux.works", "#swarm-broadcast:relux.works", "#lobby:relux.works", "#broadcast:relux.works"]
       subscriptions:
         required:
-          - { rooms: ["#swarma-pulse", "#swarm-lobby", "#swarm-broadcast", "#lobby"], kinds: [system, owner-needed, decision] }
+          - { rooms: ["#swarma-pulse:relux.works", "#swarm-lobby:relux.works", "#swarm-broadcast:relux.works", "#lobby:relux.works"], kinds: [system, owner-needed, decision] }
           - { from_mxid: "@alexis:relux.works" }
           - { from_mxid: "@alexis:gr.relux.works" }
         self: []
@@ -341,12 +341,12 @@ members:
     clone: ../../swarma-session-host
     a2a:
       connection: gr
-      parent_route: "#swarma-session-host"
-      rooms: ["#swarma-session-host", "#swarm", "#swarm-lobby", "#swarm-broadcast"]
-      spaces: ["#swarm"]
+      parent_route: "#swarma-session-host:relux.works"
+      rooms: ["#swarma-session-host:relux.works", "#swarm:relux.works", "#swarm-lobby:relux.works", "#swarm-broadcast:relux.works"]
+      spaces: ["#swarm:relux.works"]
       subscriptions:
         required:
-          - { rooms: ["#swarma-session-host", "#swarm-lobby", "#swarm-broadcast"], kinds: [system, owner-needed, decision] }
+          - { rooms: ["#swarma-session-host:relux.works", "#swarm-lobby:relux.works", "#swarm-broadcast:relux.works"], kinds: [system, owner-needed, decision] }
           - { from_mxid: "@alexis:relux.works" }
           - { from_mxid: "@alexis:gr.relux.works" }
         self: []
@@ -379,7 +379,7 @@ members:
     binding: router-gr
     project: swarma-router
     desired_state: active
-    desired_state_ref: "Existing admitted persistent project member."
+    desired_state_ref: "Existing admitted persistent project member; owner decision 119, 2026-10-30."
     clone: ../../swarma-router
     a2a:
       connection: gr
@@ -397,7 +397,7 @@ members:
     binding: keyvault-gr
     project: swarma-keyvault
     desired_state: active
-    desired_state_ref: "Existing admitted persistent project member."
+    desired_state_ref: "Existing admitted persistent project member; owner decision 110, 2026-10-30."
     clone: ../../swarma-keyvault
     a2a:
       connection: gr
