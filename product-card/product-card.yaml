@@ -51,7 +51,7 @@ profiles:           # requirement: a compatible range; selected: the immutable l
   development_product_solution-architect:
     registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development_product_solution-architect }
     requirement: { context: alexis-development-product-solution-architect-context, compatible: ">=0.1.1 <0.2.0" }
-    selected: { version: 0.1.1, source_rev: cfb133c8ff07aa6e11e68c8ef29c7b6a28c59863, lock_sha256: 0afeb17aac77bbfded1d7acda6fa1b9ad8bd87b55d918e83f61a6cd785b46674 }
+    selected: { version: 0.1.2, source_rev: 44a6c4b727a50f0a9fd69591c57af5889ca61d89, lock_sha256: 698fa1d48501b25acf5ae9d8bdf6f3116442ee131dd9d2ea4afc2ca4316fe7d8 }
   development_go_developer:
     registry: { repo: github.com/relux-works/alexis-curator-profile-registry, directory: profiles/development_go_developer }
     requirement: { context: alexis-development-go-developer-context, compatible: ">=0.1.2 <0.2.0" }
@@ -410,3 +410,33 @@ members:
           - { from_mxid: "@alexis:gr.relux.works" }
         self: []
     staffing: []
+
+  - id: architect-spica
+    role: architect
+    project: a2a-swarm
+    parent: keeper-vega
+    binding: swarma-gr
+    profile: development_product_solution-architect
+    runtime: { kind: codex_cli, model: gpt-6.1-luna, effort: max }
+    pulse:
+      schema: pulse-member-environment/v1
+      a2a_config_profile: swarma-gr
+      network: { mode: direct }
+    lifecycle: persistent
+    desired_state: active
+    desired_state_ref: "Bounded stored-state contract and synthetic-fixture contribution; separate seat under owner runtime ceiling decision 130 and Meta staffing direction, 2026-11-04. No Host seat transfer or upstream integration custody."
+    context_mode: continue
+    result_route: a2a
+    chat_admission: "Persistent local member with its own identity and binding, explicitly admitted by Meta, 2026-11-04; no spawned-child chat access. Registration and room membership must be verified separately."
+    clone: ../../a2a-swarm
+    capabilities: [architect]
+    a2a:
+      connection: gr
+      parent_route: "#swarm-a2a-swarm:relux.works"
+      rooms: ["#swarm-a2a-swarm:relux.works", "#swarm-lobby:relux.works"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarm-a2a-swarm:relux.works", "#swarm-lobby:relux.works"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
