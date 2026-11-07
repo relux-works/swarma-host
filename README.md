@@ -21,8 +21,8 @@ The GR identity bindings cover the admitted persistent members, including the Ro
 Existing runtime, profile and parked-state declarations remain distinct from identity resolution.
 The public key registry is still pending.
 
-The [host input interface qualification](docs/host-interface-qualification.md) records the fixed reader and design
-boundaries, refusal requirements, and exact missing artifacts before full successor-contract qualification.
+The [host input interface qualification](docs/host-interface-qualification.md) records the fixed reader boundaries,
+verified accepted successor-design inputs, refusal requirements, and remaining fixture and implementation dependencies.
 
 ## Tools
 
