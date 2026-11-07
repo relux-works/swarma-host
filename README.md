@@ -25,6 +25,9 @@ The [shared platform configuration contract delta](docs/platform-configuration-c
 reconciles existing Curator and Router boundaries for counterpart review.
 The common envelope and loader remain pending agreement.
 
+The [host input interface qualification](docs/host-interface-qualification.md) records the fixed reader boundaries,
+verified accepted successor-design inputs, refusal requirements, and remaining fixture and implementation dependencies.
+
 ## Tools
 
 Use the reviewed Pulse CLI with the environment view (source revision `228b96971aa547ea44daca7a8c844d156d25eced`
