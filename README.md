@@ -55,3 +55,7 @@ Owner decisions:
 - 2026-10-30: «по структуре как обсудили есть продукт в нем будет либо отдельная репа продукт-хост и в ней энтрипойнт
   для кипера и тогда работнички через пульс от этого продукта понимают всю карту продукта и где они в этой структуре
   через проекцию карты против сотрудника».
+
+The [current source facts](docs/current-source-facts.md) bind the desired card and
+published reader to a dated source snapshot, with explicit observation gaps and
+custodian inputs.
