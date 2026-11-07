@@ -21,6 +21,10 @@ The GR identity bindings cover the admitted persistent members, including the Ro
 Existing runtime, profile and parked-state declarations remain distinct from identity resolution.
 The public key registry is still pending.
 
+The [shared platform configuration contract delta](docs/platform-configuration-contract-delta.md)
+reconciles existing Curator and Router boundaries for counterpart review.
+The common envelope and loader remain pending agreement.
+
 ## Tools
 
 Use the reviewed Pulse CLI with the environment view (source revision `228b96971aa547ea44daca7a8c844d156d25eced`
