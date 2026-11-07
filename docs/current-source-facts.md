@@ -24,7 +24,7 @@ records the query, not the age of the source's operational facts.
 ## Desired structure and observations
 
 The card declares eleven projects: eight active and three parked. The parked
-projects are `gha-runner-m1max`, `remote-workplace` and `remote-worker-harness`.
+projects are a private runner project, `remote-workplace` and `remote-worker-harness`.
 Router and Keyvault are already admitted in the current card; their absence from
 an older intake list is stale. Project admission follows this card and custodian
 records, never sibling-directory discovery.
@@ -75,11 +75,11 @@ working machine. No pin upgrade or profile adoption follows from this intake.
 
 | Input | Accountable custodian | Next evidence |
 | --- | --- | --- |
-| Full retained intake resources and original acceptance clock | Host keeper and intake-record custodian | Immutable resource bodies and the existing acceptance ledger; a takeover does not restart its clock. |
+| Full retained intake resources and original acceptance clock | Host maintainers and intake-record custodian | Immutable resource bodies and the existing acceptance ledger; a takeover does not restart its clock. |
 | Successor design and F3 fixture bodies | Pulse source and Host interface custodians | Exact retained design/review bytes and separately admitted fixture bytes before executable qualification. |
 | Current member and native observations | Existing member/project and Mac-native custodians | Public observation receipts with source binding, timestamp and bounded scope. |
 | Profile source, resolved locks and installed state | Curator/profile source custodian | Immutable source/lock packets and separate installation readbacks. |
-| Public key registry and identity/key bindings | Host keeper, Keyvault custodian and authorizing owners | Separately admitted public registry/binding bytes and their verification evidence. |
+| Public key registry and identity/key bindings | Host maintainers, Keyvault custodian and authorizing owners | Separately admitted public registry/binding bytes and their verification evidence. |
 
 Interface qualification and consolidated configuration remain separate work. This
 factual snapshot changes no card, identity, key, account, profile or runtime. Its
