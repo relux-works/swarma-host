@@ -21,6 +21,9 @@ The GR identity bindings cover the admitted persistent members, including the Ro
 Existing runtime, profile and parked-state declarations remain distinct from identity resolution.
 The public key registry is still pending.
 
+The [host input interface qualification](docs/host-interface-qualification.md) records the fixed reader boundaries,
+verified accepted successor-design inputs, refusal requirements, and remaining fixture and implementation dependencies.
+
 ## Tools
 
 Use the reviewed Pulse CLI with the environment view (source revision `228b96971aa547ea44daca7a8c844d156d25eced`
