@@ -30,6 +30,7 @@ bindings:           # operator/host bindings; full identity = identity_prefix + 
   router-gr: { operator: alexis, host: m1max, identity_prefix: "router.", connection: gr }
   keyvault-gr: { operator: alexis, host: m1max, identity_prefix: "keyvault.", connection: gr }
   swarma-gr: { operator: alexis, host: m1max, identity_prefix: "swarma.", connection: gr }
+  identity-gr: { operator: alexis, host: m1max, identity_prefix: "identity.", connection: gr }
 profiles_root: ../../../../agents-curator-profiles/profiles   # relative to this card's directory
 profiles:           # requirement: a compatible range; selected: the immutable lock an authorized update chose (not install evidence)
   swarm-keeper:
@@ -154,6 +155,14 @@ projects:
     orchestrator: orch-altair
     task_system: { kind: task-board, path: ../../swarma-keyvault }
     channels: { mode: shared, team_room: "#swarma-keyvault:relux.works" }
+  - id: swarma-identity   # owner decision 308, 2026-11-11
+    description: Agent facade over a Namecoin node and a Nostr client.
+    path: ../../swarma-identity
+    repo: github.com/relux-works/swarma-identity
+    desired_state: active
+    orchestrator: orch-hadar
+    task_system: { kind: task-board, path: ../../swarma-identity }
+    channels: { mode: shared, team_room: "#swarma-identity:gr.relux.works" }
 members:
   - id: keeper-vega
     role: keeper
@@ -406,6 +415,24 @@ members:
       subscriptions:
         required:
           - { rooms: ["#swarma-keyvault:relux.works", "#swarm-lobby:relux.works"], kinds: [system, owner-needed, decision] }
+          - { from_mxid: "@alexis:relux.works" }
+          - { from_mxid: "@alexis:gr.relux.works" }
+        self: []
+    staffing: []
+  - <<: *orch
+    id: orch-hadar
+    binding: identity-gr
+    project: swarma-identity
+    desired_state: active
+    desired_state_ref: "New persistent project member; owner decision 308, 2026-11-11."
+    clone: ../../swarma-identity
+    a2a:
+      connection: gr
+      parent_route: "#swarma-identity:gr.relux.works"
+      rooms: ["#swarma-identity:gr.relux.works", "#swarm-lobby:relux.works"]
+      subscriptions:
+        required:
+          - { rooms: ["#swarma-identity:gr.relux.works", "#swarm-lobby:relux.works"], kinds: [system, owner-needed, decision] }
           - { from_mxid: "@alexis:relux.works" }
           - { from_mxid: "@alexis:gr.relux.works" }
         self: []
